@@ -19,7 +19,7 @@
     In other words, we want to see if the generator simply copies the sentence in
     the corpus instead of generating new ones. We calculate the novelty of each generated sentence
     $$S_i$$ as follows:
-$$ Novelty (S_i)  = 1 - max \{ \varphi (S_i, C_j) \}_{j=1}^{j\|C\|} $$
+$$ Novelty (S_i)  = 1 - max \{ \varphi (S_i, C_j) \}_{j = 1}^{j = \|C\| \} $$
     where C is the sentence set of the training corpus, ϕ is Jaccard similarity function. The average
     values over generated sentences are shown in Table 2, we can see that RNNLM, SeqGAN and VAE are
     not good at generating new sentences. On the contrary, our model performs exceptionally well, with the
