@@ -30,6 +30,6 @@ $$ \varphi (S_1, S_2) = \frac{ \lvert S_1 \cup S_2 \rvert }{ \lvert S_1 \cap S_2
 We want to see if the generator can produce a variety of sentences. Given a collection of
 generated sentences S, we define the diversity of sentences Si as follows:
 
-$$ Diversity(S_i) = 1 − max \\ { \varphi (S_i , S_j ) \\}^{j = \lVert S \rVert , j \neq i}_{j=1} $$
+$$ Diversity(S_i) = 1 − max \{ \varphi (S_i , S_j ) \}^{j = \lVert S \rVert , j \neq i}_{j=1} $$
 
 where $\varphi$ is the Jaccard similarity function. We calculate the maximum Jaccard similarity between each sentence $S_i$ and other sentences in the collection.
