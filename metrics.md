@@ -1,3 +1,12 @@
+---
+title: Metrics
+author: Debashish C
+header-includes:
+   - \usepackage{amsmath}
+output:
+    pdf_document
+---
+
 # Metrics
 
 ## Perplexity
@@ -8,10 +17,7 @@
 
 We use a language modeling toolkit - SRILM [Stolcke, 2002] to test the fluency
 of generated sentences. SRILM calculates the perplexity of generated sentences
-using the language model trained on respective corpus. We can see that C-GAN and
-SVAE are not good at keeping the fluency of sentences. However, our model maintains
-good fluency while generating texts of different sentiment labels, and it even
-significantly outperforms the existing models on the small CR dataset.
+using the language model trained on respective corpus. We can see that C-GAN and SVAE are not good at keeping the fluency of sentences. However, our model maintains good fluency while generating texts of different sentiment labels, and it even significantly outperforms the existing models on the small CR dataset.
 
 ## Novelty
 
@@ -26,6 +32,16 @@ where $C$ is the sentence set of the training corpus and $\varphi$ is the Jaccar
 Jaccard index is a metric often used for comparing similarity, dissimilarity, and distance of the data set. Measuring the Jaccard similarity coefficient between two data sets is the result of division between the number of features that are common to all divided by the number of properties as shown below.
 
 $$ \varphi (S_1, S_2) = \frac{ \| S_1 \cup S_2 \| }{ \| S_1 \cap S_2 \|}  $$
+
+$$
+\begin{equation*}
+    f(n) = \begin{cases}
+               0               & n = 0\\
+               1               & n = 1\\
+               f(n-1) + f(n-2) & \text{otherwise}
+           \end{cases}
+\end{equation*}
+$$
 
 Add this ref boi:
 [http://www.iaeng.org/publication/IMECS2013/IMECS2013_pp380-384.pdf](http://www.iaeng.org/publication/IMECS2013/IMECS2013_pp380-384.pdf)
