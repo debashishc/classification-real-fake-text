@@ -18,23 +18,18 @@
 
 Novelty can be used to investigate how different the generated sentences and the training corpus are. In other words, novelty can help figure out if the generator simply copies the sentence in the corpus instead of generating new ones. We calculate the novelty of each generated sentence $S_i$ as follows:
 
-$$ Novelty (S_i)  = 1 - max \{\varphi (S_i, C_j) \}_{j = 1}^{j = \|C\|\} $$
+$$ Novelty (S_i)  = 1 - max \\{\varphi (S_i, C_j) \}_{j = 1}^{j = \lvert C \rvert \\} $$
 
 where $C$ is the sentence set of the training corpus and $\varphi$ is the Jaccard similarity function.
 
 ## Jaccard Similarity:**
 
-$$ \varphi (S_1, S_2) = \frac{ \lvert S_1 \cup S_2 \rvert }{ \lvert S_1 \cap S_2 \rvert}  $$
-    
+$$ \varphi (S_1, S_2) = \frac{ \lvert S_1 \cup S_2 \rvert }{ \lvert S_1 \cap S_2 \rvert}  $
 
 **Diversity:**
-    We want to see if the generator can produce a variety of sentences. Given a collection of
-    generated sentences S, we define the diversity of sentences Si as follows:
-        Diversity(Si) = 1 − max{ϕ(Si
-        , Sj )}
-        j=|S|,j6=i
-        j=1 (11)
-    where ϕ is the Jaccard similarity function. We calculate the maximum Jaccard similarity between
-    each sentence $$S_i$$ and other sentences in the collection. The average values are shown in
-    Table 3, and we can see that our model can generate a variety of sentences, while other models
-    can not ensure the diversity of generated sentences.
+We want to see if the generator can produce a variety of sentences. Given a collection of
+generated sentences S, we define the diversity of sentences Si as follows:
+
+$$ Diversity(S_i) = 1 − max \\ { \varphi (S_i , S_j ) \\}^{j = \lVert S \rVert , j \neq i}_{j=1} $$
+
+where $\varphi$ is the Jaccard similarity function. We calculate the maximum Jaccard similarity between each sentence $S_i$ and other sentences in the collection.
