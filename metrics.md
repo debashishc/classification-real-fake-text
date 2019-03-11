@@ -23,6 +23,8 @@ where $C$ is the sentence set of the training corpus and $\varphi$ is the Jaccar
 
 ## Jaccard Similarity
 
+Jaccard index is a metric often used for comparing similarity, dissimilarity, and distance of the data set. Measuring the Jaccard similarity coefficient between two data sets is the result of division between the number of features that are common to all divided by the number of properties as shown below.
+
 $$ \varphi (S_1, S_2) = \frac{ \| S_1 \cup S_2 \| }{ \| S_1 \cap S_2 \|}  $$
 
 ## Diversity
