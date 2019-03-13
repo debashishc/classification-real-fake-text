@@ -7,12 +7,12 @@ TEST_FILE = 'data/test_emnlp.txt'
 def get_sentences(filename):
     """ Return sentences given a text file.
 
-        No need to re-tokenize 
+        Need to tokenize
     """
     with open(filename, 'r') as f:
         data = f.read()
-    # sentences = nltk.sent_tokenize(data)
-    return data
+    sentences = nltk.sent_tokenize(data)
+    return sentences
 
 
 if __name__ == '__main__':
@@ -26,13 +26,17 @@ if __name__ == '__main__':
 
     # Minimum diversity can be used to then find the sentence and potentially
     # discover reasons causing diversity to decrease
-    print("Min diversity: {}".format(min(diversities)))
-    print("Novelties for {} sentences: \n {}".format(num_of_tests, diversities))
+    min_diversity = min(diversities)
+    min_diversity_idx = diversities.index(min_diversity)
+    print("Min diversity: {}".format(min_diversity))
+    print("Sentence with min diversity: {}".format(
+        test_sentences[min_diversity_idx]))
+    print("Diversities for {} sentences: \n {}".format(num_of_tests, diversities))
     
 
     plt.plot(range(len(diversities)), diversities)
     plt.xlabel('Sentence')
-    plt.ylabel('diversity')
+    plt.ylabel('Diversity')
     plt.show()
 
 

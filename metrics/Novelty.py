@@ -26,11 +26,11 @@ def unigram(tokens):
         model[word] = model[word]/float(sum(model.values()))
     return model
 
-def novelty(sentence, document):
+def novelty(sentence, tokenized_document):
     """ Calculate the novelty of sentence compared with a given corpus/document.
     """
     # sentences = nltk.sent_tokenize(document)
-    sentences = document
+    sentences = tokenized_document
     max_jaccard_sim = - float ('inf')
 
     for ref_sentence in sentences:
