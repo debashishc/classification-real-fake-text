@@ -20,7 +20,7 @@ if __name__ == '__main__':
     test_sentences = get_sentences(TEST_FILE) # 10785 sentences
 
     diversities = list()
-    num_of_tests = 100
+    num_of_tests = len(test_sentences)
     for sentence in test_sentences[:num_of_tests]:
         diversities.append(diversity(sentence, test_sentences))
 
@@ -31,7 +31,15 @@ if __name__ == '__main__':
     print("Min diversity: {}".format(min_diversity))
     print("Sentence with min diversity: {}".format(
         test_sentences[min_diversity_idx]))
-    print("Diversities for {} sentences: \n {}".format(num_of_tests, diversities))
+    # print("Diversities for {} sentences: \n {}".format(num_of_tests, diversities))
+
+    diversity_file='all_diversities.txt'
+    with open(diversity_file, mode='w', encoding='utf-8') as f:
+
+        f.write('all_diversities = \n')
+        f.write('[')
+        f.writelines(',\n'.join(str(div) for div in diversities))
+        f.write(']')
     
 
     plt.plot(range(len(diversities)), diversities)
