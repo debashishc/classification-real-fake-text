@@ -5,7 +5,14 @@ def jaccard_similarity_words(sentence, ref_sentence):
     set2 = set(ref_sentence.split())
     intersection = set1.intersection(set2)
     union = set1.union(set2)
-    return len(intersection) / len(union)
+
+    # print('set1: ', set1)
+    # print('set2: ', set2)
+
+    if len(union) == 0:
+        return 1
+    else:
+        return len(intersection) / len(union)
 
 
 def jaccard_similarity_chars(sentence, ref_sentence):
@@ -15,4 +22,9 @@ def jaccard_similarity_chars(sentence, ref_sentence):
     set2 = set(ref_sentence)
     intersection = set1.intersection(set2)
     union = set1.union(set2)
-    return len(intersection)/len(union)
+
+
+    if len(union) == 0:
+        return 1
+    else:
+        return len(intersection) / len(union)

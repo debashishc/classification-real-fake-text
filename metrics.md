@@ -33,15 +33,7 @@ Jaccard index is a metric often used for comparing similarity, dissimilarity, an
 
 $$ \varphi (S_1, S_2) = \frac{ \| S_1 \cup S_2 \| }{ \| S_1 \cap S_2 \|}  $$
 
-$$
-\begin{equation*}
-    f(n) = \begin{cases}
-               0               & n = 0\\
-               1               & n = 1\\
-               f(n-1) + f(n-2) & \text{otherwise}
-           \end{cases}
-\end{equation*}
-$$
+
 
 Add this ref boi:
 [http://www.iaeng.org/publication/IMECS2013/IMECS2013_pp380-384.pdf](http://www.iaeng.org/publication/IMECS2013/IMECS2013_pp380-384.pdf)
