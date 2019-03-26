@@ -1,9 +1,11 @@
 from metrics.Novelty import novelty
 import nltk
 from matplotlib import pyplot as plt
+from tqdm import tqdm
 
 DATA_FILE = 'data/emnlp_news.txt'
 TEST_FILE = 'data/test_emnlp.txt'
+GENERATED_FILE = 'data/generated_text.txt'
 
 def get_sentences(filename):
     """ Return sentences given a text file.
@@ -19,7 +21,7 @@ def find_plot_novelties(test_sentences, corpus_sentences, novelty_file):
     print("Example corpus sentence: ", corpus_sentences[0])
     print("Example test sentence: ", test_sentences[0])
 
-    for sentence in test_sentences[:num_of_tests]:
+    for sentence in tqdm(test_sentences[:num_of_tests], desc="Test sentences"):
         novelties.append(novelty(sentence, corpus_sentences))
 
     # Minimum novelty can be used to then find the sentence and potentially
@@ -47,10 +49,13 @@ if __name__ == '__main__':
     # save these sentences and novelties to save computation time
     corpus_sentences = get_sentences(DATA_FILE)  # 304222 sentences
     # print(len(corpus_sentences))
-    test_sentences = get_sentences(TEST_FILE) # 10785 sentences
+    # test_sentences = get_sentences(TEST_FILE) # 10785 sentences
+    generated_sentences = get_sentences(GENERATED_FILE)
+    print(len(generated_sentences))
+
     # print(test_sentences[9]) # They picked him off three times and kept him out of the end zone in a 22 - 6 victory at Arizona in 2013 .
 
     # find novelties within the corpus
-    find_plot_novelties(corpus_sentences, corpus_sentences,     novelty_file='all_novelties_within_corpus.txt')
+    find_plot_novelties(generated_sentences, corpus_sentences,     novelty_file='novelties_gen_training.txt')
 
 
