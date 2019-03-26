@@ -58,3 +58,19 @@ if __name__ == '__main__':
 
     # find diversities within the corpus
     find_plot_diversities(generated_sentences, generated_sentences,     diversity_file='diversities_intra_gen.txt')
+
+
+
+#     python Test_Diversity.py
+# Example corpus sentence:  My sources have suggested that so far the company sees no reason to change its tax structures , which are perfectlyge its tax structures , which are perfectly legal .
+# '
+# Example test sentence:  a bathroom with a glass shower , sink and white .
+# Min diversity: 0.7407407407407407
+# Sentence with min diversity: a group of motorcycles parked on the sidewalks in a field .
+
+# (tf-gpu) C:\Users\deb.chk\Documents\GitHub\NLP-tools>python Test_Diversity.py
+# Example corpus sentence:  a bathroom with a glass shower , sink and white .
+# Example test sentence:  a bathroom with a glass shower , sink and white .
+# Generated sentences: 100%|███████████████████████████████████| 9003/9003 [04:33<00:00, 32.86it/s]
+# Min diversity: 0.3125
+# Sentence with min diversity: a bathroom with a mirrors reflection on far in the toilet .

@@ -1,4 +1,7 @@
 #!/Users/dc/anaconda3/bin/python3
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.mlab as mlab
 
 def read_list(filename: str) -> list:
     with open(file=filename, mode='r') as f:
@@ -9,17 +12,11 @@ def read_list(filename: str) -> list:
     return result_list
 
 
-all_diversities = read_list('all_diversities.txt')
-# all_diversities = read_list('all_diversities_within_corpus.txt')
-print(len(all_diversities))
-
 def normal_distribution(values: list, name_of_values: str) -> None:
     """
     normal_distribution(all_diversities, 'Diversity of generated text')
     """
-    import numpy as np
-    import matplotlib.pyplot as plt
-    import matplotlib.mlab as mlab
+
     
     mean = np.nanmean(values)
     sigma = np.nanstd(values)
@@ -29,7 +26,7 @@ def normal_distribution(values: list, name_of_values: str) -> None:
     fig, ax = plt.subplots()
 
     #the histogram of the data
-    n, bins, patches = ax.hist(values, num_bins, normed=True)
+    n, bins, _ = ax.hist(values, num_bins, normed=True)
 
     # add a 'best fit' line
     y = mlab.normpdf(bins, mean, sigma)
@@ -47,3 +44,23 @@ def normal_distribution(values: list, name_of_values: str) -> None:
     # Tweak spacing to prevent clipping of ylabel
     fig.tight_layout()
     plt.show()
+
+def get_scatter_plot(data_x, data_y):
+    """ Scatter plot of novelties vs diversities. """
+    plt.scatter(data_x, data_y, alpha=0.1)
+
+    plt.title('Scatter plot for {} vs {} for generated text'.format("Novelties", "Diversities"))
+    plt.xlabel('Novelty')
+    plt.xlim(0.5, 1)
+    plt.ylim(0.5, 1)
+    plt.ylabel('Diversity')
+    plt.show()
+
+if __name__ == '__main__':
+    all_diversities = read_list('diversities_intra_gen.txt')
+    all_novelties = read_list('novelties_gen_training.txt')
+    # all_diversities = read_list('all_diversities_within_corpus.txt')
+    # print(len(all_diversities))
+    # normal_distribution(all_diversities, 'Novelties of generated text')
+    get_scatter_plot(all_novelties, all_diversities)
+
