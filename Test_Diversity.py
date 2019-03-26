@@ -4,6 +4,7 @@ from matplotlib import pyplot as plt
 
 DATA_FILE = 'data/emnlp_news.txt'
 TEST_FILE = 'data/test_emnlp.txt'
+GENERATED_FILE = 'data/generated_text.txt'
 
 def get_sentences(filename):
     """ Return sentences given a text file.
@@ -34,9 +35,9 @@ def find_plot_diversities(test_sentences, corpus_sentences, diversity_file):
     
     with open(diversity_file, mode='w', encoding='utf-8') as f:
         f.write('all_diversities = \n')
-        f.write('[')
+        f.write('[\n')
         f.writelines(',\n'.join(str(nov) for nov in diversities))
-        f.write(']')
+        f.write('\n]')
     
 
     # plot diversities against sentence
@@ -48,10 +49,11 @@ def find_plot_diversities(test_sentences, corpus_sentences, diversity_file):
 
 if __name__ == '__main__':
     # save these sentences and diversities to save computation time
-    test_sentences = get_sentences(TEST_FILE) # 10785 sentences
+    # test_sentences = get_sentences(TEST_FILE) # 10785 sentences
+    generated_sentences = get_sentences(GENERATED_FILE)
 
     # save these sentences and novelties to save computation time
     corpus_sentences = get_sentences(DATA_FILE)  # 304222 sentences
 
     # find diversities within the corpus
-    find_plot_diversities(corpus_sentences, corpus_sentences,     diversity_file='all_diversities_within_corpus.txt')
+    find_plot_diversities(generated_sentences, corpus_sentences,     diversity_file='diversities_gen_training.txt')
