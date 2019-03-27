@@ -21599,5 +21599,5 @@ all_diversities = [0.8947368421052632,
  0.925,
  0.925]
 
-
-get_scatter_plot(all_novelties, all_diversities)
+if __name__ == "__main__":
+    get_scatter_plot(all_novelties, all_diversities)

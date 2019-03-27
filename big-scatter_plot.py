@@ -3,6 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 
+from plotting import all_diversities as test_diversities
+from plotting import all_novelties as test_novelties
+
 def read_list(filename: str) -> list:
     with open(file=filename, mode='r') as f:
         result_list = list()
@@ -47,21 +50,26 @@ def normal_distribution(values: list, name_of_values: str) -> None:
 
 def get_scatter_plot(data_x, data_y):
     """ Scatter plot of novelties vs diversities. """
-    plt.scatter(data_x, data_y)
+    plt.scatter(test_diversities, test_novelties, color='red', label='Real text', alpha=0.3)
+    plt.scatter(data_x, data_y, color='blue', label='Fake text', alpha=0.3)
 
     plt.title('{} vs {} of sentences for generated text set'.format("Novelties", "Diversities"))
     plt.xlabel('Diversity of sentence')
     plt.xlim(0, 1)
     plt.ylim(0, 1)
     plt.ylabel('Novelty of sentence')
+    plt.legend(loc='upper left')
     plt.show()
-    plt.savefig('scatter.png')
+    # plt.savefig('scatter.png')
 
 if __name__ == '__main__':
-    all_diversities = read_list('diversities_intra_gen.txt')
-    all_novelties = read_list('novelties_gen_training.txt')
+    fake_diversities = read_list('diversities_intra_gen.txt')
+    fake_novelties = read_list('novelties_gen_training.txt')
+
+    # test_diversities = read_list('diversities_intra_gen.txt')
+    # test_novelties = read_list('diversities_intra_gen.txt')
     # all_diversities = read_list('all_diversities_within_corpus.txt')
     # print(len(all_diversities))
     # normal_distribution(all_diversities, 'Novelties of generated text')
-    get_scatter_plot(all_diversities, all_novelties)
+    get_scatter_plot(fake_diversities, fake_novelties)
 
