@@ -47,14 +47,15 @@ def normal_distribution(values: list, name_of_values: str) -> None:
 
 def get_scatter_plot(data_x, data_y):
     """ Scatter plot of novelties vs diversities. """
-    plt.scatter(data_x, data_y, alpha=0.1)
+    plt.plot(data_x, data_y, 'o', color='red')
 
-    plt.title('Scatter plot for {} vs {} for generated text'.format("Novelties", "Diversities"))
-    plt.xlabel('Novelty')
-    plt.xlim(0.5, 1)
-    plt.ylim(0.5, 1)
-    plt.ylabel('Diversity')
+    plt.title('{} vs {} of sentences for generated text set'.format("Novelties", "Diversities"))
+    plt.xlabel('Novelty of sentence')
+    plt.xlim(0, 1)
+    plt.ylim(0, 1)
+    plt.ylabel('Diversity of sentence')
     plt.show()
+    plt.savefig('scatter.png')
 
 if __name__ == '__main__':
     all_diversities = read_list('diversities_intra_gen.txt')
@@ -62,5 +63,5 @@ if __name__ == '__main__':
     # all_diversities = read_list('all_diversities_within_corpus.txt')
     # print(len(all_diversities))
     # normal_distribution(all_diversities, 'Novelties of generated text')
-    get_scatter_plot(all_novelties, all_diversities)
+    get_scatter_plot(all_diversities, all_novelties)
 
