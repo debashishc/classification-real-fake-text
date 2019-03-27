@@ -47,13 +47,13 @@ def normal_distribution(values: list, name_of_values: str) -> None:
 
 def get_scatter_plot(data_x, data_y):
     """ Scatter plot of novelties vs diversities. """
-    plt.plot(data_x, data_y, 'o', color='red')
+    plt.scatter(data_x, data_y)
 
     plt.title('{} vs {} of sentences for generated text set'.format("Novelties", "Diversities"))
-    plt.xlabel('Novelty of sentence')
+    plt.xlabel('Diversity of sentence')
     plt.xlim(0, 1)
     plt.ylim(0, 1)
-    plt.ylabel('Diversity of sentence')
+    plt.ylabel('Novelty of sentence')
     plt.show()
     plt.savefig('scatter.png')
 
