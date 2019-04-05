@@ -9,8 +9,7 @@ GENERATED_FILE = 'data/generated_text.txt'
 
 def get_sentences(filename):
     """ Return sentences given a text file.
-
-        Need to tokenize
+        The sentences will be tokenized in this function.
     """
     with open(filename, 'r') as f:
         data = f.read()
