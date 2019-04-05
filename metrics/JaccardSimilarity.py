@@ -1,3 +1,4 @@
+
 def jaccard_similarity_words(sentence, ref_sentence):
     """Calculate the Jaccard Similarity between two sentences using sets of words.
     """

@@ -1,5 +1,3 @@
-
-
 def levenshtein(s1: str, s2: str) -> int:
     """ Calculate the Levenshtein distance between two strings.
 

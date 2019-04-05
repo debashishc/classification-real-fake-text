@@ -3,6 +3,7 @@ import collections
 import nltk
 from metrics.JaccardSimilarity import jaccard_similarity_words
 from metrics.Levenshtein import levenshtein
+import numpy as np
 
 corpus = """
 Monty Python (sometimes known as The Pythons) were a British surreal comedy group who created the sketch comedy show Monty Python's Flying Circus,
@@ -41,6 +42,7 @@ def unigram(tokens):
 
 #     return 1 - max_jaccard
 
+from numba import cuda
 
 def novelty(sentence: str, tokenized_sentences: str, similarity_metric: str) -> float:
     """ Calculate the novelty of sentence compared with a given corpus/document.
@@ -48,14 +50,14 @@ def novelty(sentence: str, tokenized_sentences: str, similarity_metric: str) -> 
     # sentences = nltk.sent_tokenize(document)
 
     if similarity_metric == 'jaccard':
-        max_sim = - float('inf')
+        max_sim = - np.inf
         for ref_sentence in tokenized_sentences:
             jaccard_sim = jaccard_similarity_words(sentence, ref_sentence)
             if jaccard_sim > max_sim:
                 max_sim = jaccard_sim
 
     elif similarity_metric == 'levenshtein':
-        min_edit_distance = float('inf')
+        min_edit_distance = np.inf
         for ref_sentence in tokenized_sentences:
             if sentence != ref_sentence:
                 edit_distance = levenshtein(sentence, ref_sentence)
