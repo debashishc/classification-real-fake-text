@@ -23,7 +23,9 @@ def find_plot_diversities(test_sentences, corpus_sentences, diversity_file):
     print("Example test sentence: ", test_sentences[0])
 
     for sentence in tqdm(test_sentences[:num_of_tests], desc="Generated sentences"):
-        diversities.append(diversity(sentence, corpus_sentences))
+        diversities.append(diversity(sentence, corpus_sentences, 'jaccard'))
+        # diversities.append(diversity(sentence, corpus_sentences, 'levenshtein'))
+
 
     # Minimum diversity can be used to then find the sentence and potentially
     # discover reasons causing diversity to decrease
@@ -56,7 +58,8 @@ if __name__ == '__main__':
     corpus_sentences = get_sentences(DATA_FILE)  # 304222 sentences
 
     # find diversities within the corpus
-    find_plot_diversities(generated_sentences, generated_sentences,     diversity_file='diversities_intra_gen.txt')
+    find_plot_diversities(generated_sentences, generated_sentences,    
+                                diversity_file='NEW_diversities_intra_gen_jaccard.txt')
 
 
 

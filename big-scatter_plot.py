@@ -63,8 +63,8 @@ def get_scatter_plot(data_x, data_y):
     # plt.savefig('scatter.png')
 
 if __name__ == '__main__':
-    fake_diversities = read_list('diversities_intra_gen.txt')
-    fake_novelties = read_list('novelties_gen_training.txt')
+    fake_diversities = read_list('NEW_diversities_intra_gen_jaccard.txt')
+    fake_novelties = read_list('NEW_novelties_gen_training.txt')
 
     # test_diversities = read_list('diversities_intra_gen.txt')
     # test_novelties = read_list('diversities_intra_gen.txt')
