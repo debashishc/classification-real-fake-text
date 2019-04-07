@@ -1,4 +1,5 @@
 #package imports
+import os
 import numpy as np
 import pandas as pd 
 import re
@@ -48,31 +49,20 @@ from langdetect import DetectorFactory
 DetectorFactory.seed = 0
 
 # Pre-defined imports
-from classifier.Preprocessing import get_sentences
+from Preprocessing import get_sentences
 
 
 max_features = 5000 #number of words to consider as features 
 
-def get_sequences(max_features, sentences):
+def get_sequences(max_features, data):
     #tokenize and put into sequences
     tokenizer = Tokenizer(num_words=max_features, split=' ')
     # print(tokenizer)
-    tokenizer.fit_on_texts(sentences)
+    tokenizer.fit_on_texts(data['text'].values)
     # print(data['text'].values)
     sequences = tokenizer.texts_to_sequences(data['text'].values)
     sequences = pad_sequences(sequences) #maxlen = len of longest sequence/words in a sentence
     return sequences
-
-
-x = sequences # pre-processed data from step 3
-y = pd.get_dummies(data['target']).values #turn sentiments into 0 and 1 into a (11538,2) matrix
-
-#-----Define LSTM parameters-----#
-embedding_dim = 400
-units = 250 #dimensionality of the output space
-batch_size = 32 #Batch of sequences to process as input (fed into the .fit function)
-#dropout =0.2 #float between 0 and 1. Fraction of the units to drop for the linear transformation of the inputs.
-#recurrent_dropout=0.2 #Float between 0 and 1. Fraction of the units to drop for the linear transformation of the recurrent state.
 
 
 def create_lstm_model():
@@ -111,4 +101,59 @@ def create_lstm_model():
 
 if __name__ == '__main__':
 
-    data = pd.read_csv()
+    filepath='labelled_processed_text.csv'
+
+    file_dir = os.path.dirname(os.path.realpath('__file__'))
+    filename = os.path.join(file_dir, filepath)
+    filename = os.path.abspath(os.path.realpath(filename))
+
+    data = pd.read_csv(filename)
+
+    sequences = get_sequences(max_features=5000, data=data)
+
+    x = sequences # pre-processed data from step 3
+    print(x)
+    y = pd.get_dummies(data['label']).values #turn sentiments into 0 and 1 into a (11538,2) matrix
+    print(y)
+
+    #-----Define LSTM parameters-----#
+    embedding_dim = 400
+    units = 250 #dimensionality of the output space
+    batch_size = 32 #Batch of sequences to process as input (fed into the .fit function)
+    #dropout =0.2 #float between 0 and 1. Fraction of the units to drop for the linear transformation of the inputs.
+    #recurrent_dropout=0.2 #Float between 0 and 1. Fraction of the units to drop for the linear transformation of the recurrent state.
+
+
+    max_len = 30 # Cuts off texts after this many words (among the max_features most common words)
+    epochs = 6
+
+
+    # x_train, x_test, y_train, y_test = train_test_split(x,y, test_size = 0.10, random_state = 42) #random state to get same split output (42, 0, 21)
+    x_train, x_test, y_train, y_test = train_test_split(x,y, test_size = 0.10, random_state = 42) #random state to get same split output (42, 0, 21)
+    
+    print('input dimensions:', x.shape, '|', 'output dimensions:', y.shape)
+    print('x_train dimensions:', x_train.shape, '|', 'y_train dimensions:', y_train.shape)
+    print('x_test dimensions:', x_test.shape, '|', 'y_test dimensions:', y_test.shape)
+
+    keras_model = create_lstm_model()
+    history = keras_model.fit(x, y, validation_split=0.25, epochs=epochs, batch_size=batch_size, verbose=2)
+
+    # Plot training & validation accuracy values
+    # plt.plot(history.history['categorical_accuracy']) #tf
+    # plt.plot(history.history['val_categorical_accuracy']) #tf
+    plt.plot(history.history['acc']) #keras
+    plt.plot(history.history['val_acc']) #keras
+    plt.title('Model accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()
+
+    # Plot training & validation loss values
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('Model loss')
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()

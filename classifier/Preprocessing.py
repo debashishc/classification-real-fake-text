@@ -27,12 +27,13 @@ def process(sentences):
 def create_labelled_text(corpus, test, generated):
     text_dict = dict()
 
-    for ix, sentence in enumerate(process(corpus)):
+    for ix, sentence in enumerate(corpus):
         text_dict[ix] = (sentence, 1)
-    for ix, sentence in enumerate(process(test)):
-        text_dict[ix] = (sentence, 1)
-    for ix, sentence in enumerate(process(generated)):
-        text_dict[ix] = (sentence, 0)
+    for ix, sentence in enumerate(test):
+        text_dict[ix+4000] = (sentence, 1)
+    for ix, sentence in enumerate(generated):
+        text_dict[ix+8000] = (sentence, 0)
+        
     return text_dict
 
 def write_to_csv(text_dict, filename):
@@ -61,8 +62,9 @@ if __name__ == "__main__":
 
     # training the classifier
     corpus_training = corpus_sentences[:4000]
+    # print(corpus_training[:10])
     test_training = test_sentences[:4000]
-
+    # print(corpus_training[:10])
     generated_training = generated_sentences[:8000]
 
     # testing the classifier
@@ -71,4 +73,4 @@ if __name__ == "__main__":
 
     # create training csv
     text_dict = create_labelled_text(corpus_training, test_training, generated_training)
-    write_to_csv(text_dict, filename='labelled_text.csv')
+    write_to_csv(text_dict, filename='labelled_unprocessed_text.csv')
