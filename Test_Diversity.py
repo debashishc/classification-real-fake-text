@@ -5,13 +5,13 @@ from tqdm import tqdm
 
 DATA_FILE = 'data/emnlp_news.txt'
 TEST_FILE = 'data/test_emnlp.txt'
-GENERATED_FILE = 'data/generated_text.txt'
+GENERATED_FILE = 'data/generated_text2.txt'
 
 def get_sentences(filename):
     """ Return sentences given a text file.
         The sentences will be tokenized in this function.
     """
-    with open(filename, 'r') as f:
+    with open(filename, mode='r', encoding="ISO-8859-1") as f:
         data = f.read()
     sentences = nltk.sent_tokenize(data)
     return sentences
@@ -42,24 +42,24 @@ def find_plot_diversities(test_sentences, corpus_sentences, diversity_file):
         f.write('\n]')
     
 
-    # plot diversities against sentence
-    plt.plot(range(len(diversities)), diversities)
-    plt.xlabel('Sentence')
-    plt.ylabel('Novelty')
-    plt.show()
+    # # plot diversities against sentence
+    # plt.plot(range(len(diversities)), diversities)
+    # plt.xlabel('Sentence')
+    # plt.ylabel('Novelty')
+    # plt.show()
 
 
 if __name__ == '__main__':
     # save these sentences and diversities to save computation time
     # test_sentences = get_sentences(TEST_FILE) # 10785 sentences
-    generated_sentences = get_sentences(GENERATED_FILE)
+    generated_sentences = get_sentences(GENERATED_FILE) # 11055 sentences
 
     # save these sentences and novelties to save computation time
     corpus_sentences = get_sentences(DATA_FILE)  # 304222 sentences
 
     # find diversities within the corpus
     find_plot_diversities(generated_sentences, generated_sentences,    
-                                diversity_file='NEW_diversities_intra_gen_levenshtein.txt')
+                                diversity_file='Leakgan_diversities_intra_gen_jaccard.txt')
 
 
 
