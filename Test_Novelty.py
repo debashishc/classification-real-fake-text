@@ -5,12 +5,12 @@ from tqdm import tqdm
 
 DATA_FILE = 'data/emnlp_news.txt'
 TEST_FILE = 'data/test_emnlp.txt'
-GENERATED_FILE = 'data/generated_text.txt'
+GENERATED_FILE = 'data/generated_text2.txt'
 
 def get_sentences(filename):
     """ Return sentences given a text file.
     """
-    with open(filename, 'r') as f:
+    with open(filename, mode='r', encoding="ISO-8859-1") as f:
         data = f.read()
     sentences = nltk.sent_tokenize(data)
     return sentences
@@ -22,8 +22,8 @@ def find_plot_novelties(test_sentences, corpus_sentences, novelty_file):
     print("Example test sentence: ", test_sentences[0])
 
     for sentence in tqdm(test_sentences[:num_of_tests], desc="Test sentences"):
-        # novelties.append(novelty(sentence, corpus_sentences, 'jaccard'))
-        novelties.append(novelty(sentence, corpus_sentences, 'levenshtein'))
+        novelties.append(novelty(sentence, corpus_sentences, 'jaccard'))
+        # novelties.append(novelty(sentence, corpus_sentences, 'levenshtein'))
 
     # Minimum novelty can be used to then find the sentence and potentially
     # discover reasons causing novelty to decrease
@@ -58,6 +58,6 @@ if __name__ == '__main__':
 
     # find novelties within the corpus
     find_plot_novelties(generated_sentences, corpus_sentences, 
-                        novelty_file='NEW_novelties_gen_training_levenshtein.txt')
+                        novelty_file='LeakGAN_novelties_gen_training_jaccard.txt')
 
 
