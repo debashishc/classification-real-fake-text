@@ -44,10 +44,6 @@ from keras.utils import plot_model
 import h5py
 from keras.models import load_model
 
-from langdetect import detect
-from langdetect import DetectorFactory
-DetectorFactory.seed = 0
-
 # Pre-defined imports
 from Preprocessing import get_sentences
 
@@ -73,7 +69,8 @@ def create_lstm_model():
 
 #   model.add(LSTM(units, dropout = 0.2, recurrent_dropout =0.1, kernel_regularizer=l2(0.001), recurrent_regularizer=l2(0.001), bias_regularizer=l2(0.001))) #return_sequences=True))    
 #   model.add(LSTM(units, dropout = 0.2, recurrent_dropout =0.2)) #return_sequences=True))
-    model.add(layers.CuDNNLSTM(units))
+    # model.add(layers.CuDNNLSTM(units)) # for GPU
+    model.add(layers.LSTM(units))
     
     model.add(layers.Dense(100, input_dim =2, activation = 'relu', kernel_regularizer=l2(0.001)))
     model.add(layers.Dense(2,activation='softmax')) #no. of classes is 2, softmax is the same as the sigmoid function.
@@ -101,7 +98,7 @@ def create_lstm_model():
 
 if __name__ == '__main__':
 
-    filepath='labelled_processed_text.csv'
+    filepath='results/data_generated1/labelled_processed_text.csv'
 
     file_dir = os.path.dirname(os.path.realpath('__file__'))
     filename = os.path.join(file_dir, filepath)

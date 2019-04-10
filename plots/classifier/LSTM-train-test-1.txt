@@ -1,0 +1,13 @@
+Epoch 1/6
+2019-04-10 09:19:06.364524: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+ - 81s - loss: 0.2416 - acc: 0.9187 - val_loss: 0.0328 - val_acc: 0.9962
+Epoch 2/6
+ - 80s - loss: 0.0500 - acc: 0.9868 - val_loss: 0.0389 - val_acc: 0.9922
+Epoch 3/6
+ - 81s - loss: 0.0246 - acc: 0.9935 - val_loss: 0.0068 - val_acc: 0.9995
+Epoch 4/6
+ - 81s - loss: 0.0168 - acc: 0.9966 - val_loss: 0.0185 - val_acc: 0.9958
+Epoch 5/6
+ - 81s - loss: 0.0094 - acc: 0.9980 - val_loss: 0.0150 - val_acc: 0.9960
+Epoch 6/6
+ - 81s - loss: 0.0088 - acc: 0.9979 - val_loss: 0.0196 - val_acc: 0.9958
