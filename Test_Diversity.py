@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 DATA_FILE = 'data/emnlp_news.txt'
 TEST_FILE = 'data/test_emnlp.txt'
-GENERATED_FILE = 'data/generated_text3.txt'
+GENERATED_FILE = 'data/generated_text2.txt'
 
 def get_sentences(filename):
     """ Return sentences given a text file.
@@ -59,7 +59,7 @@ if __name__ == '__main__':
 
     # find diversities within the corpus
     find_plot_diversities(generated_sentences, generated_sentences,    
-                                diversity_file='Leakgan_diversities_intra_gen3_leven.txt')
+                                diversity_file='Leakgan_diversities_intra_gen2_leven.txt')
 
 
 

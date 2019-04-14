@@ -17,13 +17,12 @@ def get_sentences(filename):
 
 def find_plot_novelties(test_sentences, corpus_sentences, novelty_file):
     novelties = list()
-    num_of_tests = len(test_sentences)
     print("Example corpus sentence: ", corpus_sentences[0])
     print("Example test sentence: ", test_sentences[0])
 
-    for sentence in tqdm(test_sentences[:num_of_tests], desc="Test sentences"):
-        novelties.append(novelty(sentence, corpus_sentences, 'jaccard'))
-        # novelties.append(novelty(sentence, corpus_sentences, 'levenshtein'))
+    for sentence in tqdm(test_sentences, desc="Test sentences"):
+        # novelties.append(novelty(sentence, corpus_sentences, 'jaccard'))
+        novelties.append(novelty(sentence, corpus_sentences, 'levenshtein'))
 
     # Minimum novelty can be used to then find the sentence and potentially
     # discover reasons causing novelty to decrease
@@ -57,7 +56,17 @@ if __name__ == '__main__':
     # print(test_sentences[9]) # They picked him off three times and kept him out of the end zone in a 22 - 6 victory at Arizona in 2013 .
 
     # find novelties within the corpus
-    find_plot_novelties(generated_sentences, corpus_sentences, 
-                        novelty_file='LeakGAN_novelties_gen_training_jaccard.txt')
+    # print("Novelties for first 3500")
+    # print("Novelties for 3500 - 7000 sentences")
+    print("Novelties for 7000 - sentences")
+
+    # find_plot_novelties(generated_sentences[:3500], corpus_sentences, 
+    #                     novelty_file='LeakGAN_novelties_gen2_training_leven3500.txt')
+    # find_plot_novelties(generated_sentences[3500:7000], corpus_sentences, 
+    #                     novelty_file='LeakGAN_novelties_gen2_training_leven7000.txt')
+    find_plot_novelties(generated_sentences[7000:], corpus_sentences, 
+                        novelty_file='LeakGAN_novelties_gen2_training_leven10000.txt')
+
+    
 
 

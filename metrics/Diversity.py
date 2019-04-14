@@ -34,7 +34,9 @@ def diversity(sentence: str, tokenized_sentences: str, similarity_metric: str) -
         min_edit_distance = np.inf
         for ref_sentence in tokenized_sentences:
             if sentence != ref_sentence:
-                edit_distance = levenshtein(sentence, ref_sentence)
+                edit_distance = levenshtein(sentence, ref_sentence) \
+                                    / max(len(sentence), len(ref_sentence))
+
                 if edit_distance < min_edit_distance:
                     min_edit_distance = edit_distance
                     # maximum similarity is minimum edit distance
