@@ -58,8 +58,8 @@ if __name__ == '__main__':
     corpus_sentences = get_sentences(DATA_FILE)  # 304222 sentences
 
     # find diversities within the corpus
-    find_plot_diversities(generated_sentences, generated_sentences,    
-                                diversity_file='Leakgan_diversities_intra_gen2_leven.txt')
+    find_plot_diversities(corpus_sentences, corpus_sentences,    
+                                diversity_file='diversities_real.txt')
 
 
 
