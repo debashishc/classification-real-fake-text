@@ -56,18 +56,17 @@ def novelty(sentence: str, tokenized_sentences: str, similarity_metric: str) -> 
             if jaccard_sim > max_sim:
                 max_sim = jaccard_sim
 
+        return 1 - max_sim
+
     elif similarity_metric == 'levenshtein':
         min_edit_distance = np.inf
         for ref_sentence in tokenized_sentences:
-            if sentence != ref_sentence:
-                edit_distance = levenshtein(sentence, ref_sentence) \
-                                    / max(len(sentence), len(ref_sentence))
-                if edit_distance < min_edit_distance:
-                    min_edit_distance = edit_distance
-                    # maximum similarity is minimum edit distance
-                    max_sim = min_edit_distance
+            edit_distance = levenshtein(sentence, ref_sentence) \
+                                / max(len(sentence), len(ref_sentence))
+            if edit_distance < min_edit_distance:
+                min_edit_distance = edit_distance
 
-    return 1 - max_sim
+        return min_edit_distance
 
 
 if __name__ == '__main__':
