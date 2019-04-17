@@ -63,13 +63,20 @@ def get_scatter_plot(data_x, data_y):
     # plt.savefig('scatter.png')
 
 if __name__ == '__main__':
-    fake_diversities = read_list('LeakGAN_diversities_intra_gen_jaccard.txt')
-    fake_novelties = read_list('LeakGAN_novelties_gen_training_jaccard.txt')
+    # fake_diversities = read_list('LeakGAN_diversities_intra_gen_jaccard.txt')
+    # fake_novelties = read_list('LeakGAN_novelties_gen_training_jaccard.txt')
 
     # test_diversities = read_list('diversities_intra_gen.txt')
     # test_novelties = read_list('diversities_intra_gen.txt')
     # all_diversities = read_list('all_diversities_within_corpus.txt')
     # print(len(all_diversities))
     # normal_distribution(all_diversities, 'Novelties of generated text')
-    get_scatter_plot(fake_diversities, fake_novelties)
+
+    fake_diversities = read_list(
+        'Leakgan_diversities_intra_gen2_leven.txt')
+    fake_novelties = read_list('LeakGAN_novelties_gen2_training_leven7000.txt')
+
+    print(len(fake_diversities))
+    print(len(fake_novelties))
+    get_scatter_plot(fake_diversities[:6999], fake_novelties)
 
