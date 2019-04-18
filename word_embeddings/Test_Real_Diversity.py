@@ -106,3 +106,6 @@ if __name__ == "__main__":
 
     find_plot_diversities(processed_test_text, processed_real_text,
                                 diversity_file='wmd_diversities_real_text.txt')
+
+    # python3 Test_Real_Diversity.py ; git add wmd_diversities_real_text.txt; git commit -m "Adding wmd_diversities_real.txt"; git push origin master
+
