@@ -104,5 +104,5 @@ if __name__ == "__main__":
 
     len_real = len(processed_real_text)
 
-    find_plot_diversities(processed_test_text, processed_test_text[:len_real//10],    
+    find_plot_diversities(processed_test_text, processed_real_text,
                                 diversity_file='wmd_diversities_real_text.txt')
