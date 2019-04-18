@@ -17,11 +17,11 @@ def get_sentences(filepath):
     sentences = sent_tokenize(data)
     return sentences
 
-
+# no use of this yet
 def label_sentence(sentence, label):
     return sentence, label
 
-
+# no use of this yet
 def process(sentences):
     new_sentences = list()
     for sentence in sentences:
@@ -31,6 +31,8 @@ def process(sentences):
 
 
 def create_labelled_text(text, novs, divs, label):
+    """ Create labelled text file with corresponding novelty and diversity values
+    """
     text_dict = dict()
 
     for ix, t in enumerate(text):
@@ -48,12 +50,36 @@ def write_to_csv(text_dict, filename):
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         data = [dict(zip(fieldnames, [k, values[0], values[1], values[2], values[3]]))
-            for k, values in text_dict.items()]
+                for k, values in text_dict.items()]
+        writer.writerows(data)
+
+# bad function name
+def create_labelled_files(text, label):
+    """ Create labelled text file with no novelty or diversity values
+    """
+    text_dict = dict()
+
+    for ix, t in enumerate(text):
+        text_dict[ix] = (t, label)
+
+    return text_dict
+
+
+def write_to_file(text_dict, filename):
+    """
+    """
+    # real labelled as 1, fake labelled as 0
+    fieldnames = ["index", "text", "label"]
+    with open(file=filename, mode='w', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        data = [dict(zip(fieldnames, [k, values[0], values[1]]))
+                for k, values in text_dict.items()]
         writer.writerows(data)
 
 
 def read_list(filename: str) -> list:
-    """
+    """ Read list from a text file containing
     """
     import re
     with open(file=filename, mode='r', encoding="ISO-8859-1") as f:
@@ -89,12 +115,24 @@ if __name__ == "__main__":
         'analysis_jaccard/jaccard_diversities_real.txt')
 
     # label real text with 1
-    real_text_dict = create_labelled_text(
-        real_sentences, real_novelties, real_diversities, 1)
-    write_to_csv(real_text_dict, filename='labelled_real_text.csv')
+    # real_text_dict = create_labelled_text(
+        # real_sentences, real_novelties, real_diversities, 1)
+    # write_to_csv(real_text_dict, filename='labelled_real_text.csv')
 
     # label fake text with 0
-    fake_text_dict = create_labelled_text(
-        fake_sentences, fake_novelties, fake_diversities, 0)
-    write_to_csv(fake_text_dict, filename='labelled_fake_text.csv')
+    # fake_text_dict = create_labelled_text(
+        # fake_sentences, fake_novelties, fake_diversities, 0)
+    # write_to_csv(fake_text_dict, filename='labelled_fake_text.csv')
     print(len(fake_sentences), len(fake_diversities), len(fake_novelties))
+
+
+    real_text = get_sentences(DATA_FILE)[:10000]
+    fake_text = get_sentences('data/generated_text2.txt')
+
+    real_dict = create_labelled_files(real_sentences, 1)
+    write_to_file(real_dict, filename='unlabelled_real_text.csv')
+
+    # label fake text with 0
+    fake_dict = create_labelled_files(fake_sentences, 0)
+    write_to_file(fake_dict, filename='unlabelled_fake_text.csv')
+    
