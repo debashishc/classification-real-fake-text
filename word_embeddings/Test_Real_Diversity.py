@@ -46,13 +46,11 @@ def preprocess(sentences: list) -> list:
 
 def find_plot_diversities(test_sentences, corpus_sentences, diversity_file):
     diversities = list()
-    num_of_tests = len(test_sentences)
     print("Example corpus sentence: ", corpus_sentences[0])
     print("Example test sentence: ", test_sentences[0])
 
-    for sentence in tqdm(test_sentences[:num_of_tests], desc="Generated sentences"):
+    for sentence in tqdm(test_sentences, desc="Generated sentences"):
         diversities.append(diversity(sentence, corpus_sentences))
-        # diversities.append(diversity(sentence, corpus_sentences, 'levenshtein'))
 
 
     # Minimum diversity can be used to then find the sentence and potentially
@@ -98,13 +96,9 @@ def diversity(sentence, tokenized_sentences) -> float:
 
 
 if __name__ == "__main__":
-    # processed_generated_text = preprocess(get_sentences(GENERATED_FILE))
     processed_test_text = preprocess(get_sentences(TEST_FILE))
-    processed_real_text = preprocess(get_sentences(DATA_FILE))
 
-    len_real = len(processed_real_text)
-
-    find_plot_diversities(processed_test_text, processed_real_text,
+    find_plot_diversities(processed_test_text, processed_test_text,
                                 diversity_file='wmd_diversities_real_text.txt')
 
     # python3 Test_Real_Diversity.py ; git add wmd_diversities_real_text.txt; git commit -m "Adding wmd_diversities_real.txt"; git push origin master
