@@ -6,12 +6,16 @@ import matplotlib.mlab as mlab
 from plotting import all_diversities as test_diversities
 from plotting import all_novelties as test_novelties
 
+
 def read_list(filename: str) -> list:
-    with open(file=filename, mode='r') as f:
+    """ Read list from a text file containing
+    """
+    import re
+    with open(file=filename, mode='r', encoding="ISO-8859-1") as f:
         result_list = list()
         data = f.read().split(',\n')
-        for line in data[1:]:
-            result_list.append(float(line.replace("]","")))
+        for line in data[0:]:
+            result_list.extend(re.findall("\d+\.\d+", line))
     return result_list
 
 
