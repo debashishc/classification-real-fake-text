@@ -103,5 +103,6 @@ if __name__ == "__main__":
     processed_real_text = preprocess(get_sentences(DATA_FILE))
 
     len_real = len(processed_real_text)
+    len_fake = len(processed_fake_text)
 
-    # find_plot_novelties(processed_fake_text[5000:7500], processed_real_text[:len_real//10], novelty_file='novelties_fake_text50007500.txt')
+    # find_plot_novelties(processed_fake_text[7500:10000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text750010000.txt')
