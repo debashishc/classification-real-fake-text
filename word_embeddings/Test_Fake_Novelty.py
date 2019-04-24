@@ -110,5 +110,8 @@ if __name__ == "__main__":
     # find_plot_novelties(processed_fake_text[3000:4500], processed_real_text[:len_real//10], novelty_file='novelties_fake_text300045000.txt')
     # find_plot_novelties(processed_fake_text[4500:6000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text45006000.txt')
 
+    # find_plot_novelties(processed_fake_text[10500:10750], processed_real_text[:len_real//10], novelty_file='novelties_fake_text1050010750.txt')
+    # find_plot_novelties(processed_fake_text[10750:11000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text1075011000.txt')
+
     # find_plot_novelties(processed_fake_text[7500:10000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text750010000.txt')
     # find_plot_novelties(processed_fake_text[10000:], processed_real_text[:len_real//10], novelty_file='novelties_fake_text10000rest.txt')
