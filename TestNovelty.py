@@ -54,6 +54,7 @@ if __name__ == '__main__':
     real_sentences = get_sentences(DATA_FILE)  # 304222 sentences
 
     len_real = len(real_sentences)
+    print(len(real_sentences))
 
     # print(test_sentences[9]) # They picked him off three times and kept him out of the end zone in a 22 - 6 victory at Arizona in 2013 .
 
@@ -62,8 +63,8 @@ if __name__ == '__main__':
     # print("Novelties for 3500 - 7000 sentences")
     # print("Novelties for 7000 - sentences")
 
-    find_plot_novelties(test_sentences, real_sentences[:len_real//10], 
-                        novelty_file='lev_novelties_real.txt')
+    find_plot_novelties(test_sentences[:100], real_sentences[:len_real//10], 
+                        novelty_file='CHECK_lev_novelties_real_.txt')
 
     # find_plot_novelties(generated_sentences[:3500], corpus_sentences, 
     #                     novelty_file='LeakGAN_novelties_gen2_training_leven3500.txt')

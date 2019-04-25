@@ -54,14 +54,9 @@ if __name__ == '__main__':
     test_sentences = get_sentences(TEST_FILE) # 10785 sentences
     generated_sentences = get_sentences(GENERATED_FILE) # 11055 sentences
 
-    # save these sentences and novelties to save computation time
-    real_sentences = get_sentences(DATA_FILE)  # 304222 sentences
-
-    len_real = len(real_sentences)
-
     # find diversities within the corpus
-    find_plot_diversities(test_sentences, real_sentences[:len_real//10],
-                                diversity_file='lev_diversities_real.txt')
+    find_plot_diversities(test_sentences[5000:], test_sentences,
+                                diversity_file='CHECK_lev_diversities_real_rest.txt')
 
 
 
