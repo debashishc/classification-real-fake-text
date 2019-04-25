@@ -107,6 +107,11 @@ if __name__ == "__main__":
     # print(corpus_training[:10]) # 10785
     # print(corpus_training[:10])
 
+
+    #############################
+    # Jaccard similarity
+    ##############################
+
     fake_diversities = read_list('analysis_jaccard/jaccard_diversities_fake3.txt')
     fake_novelties = read_list('analysis_jaccard/jaccard_novelties_fake3.txt')
 
