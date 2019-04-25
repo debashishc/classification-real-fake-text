@@ -18,6 +18,16 @@ import numpy as np
 
 from gensim.models import Word2Vec
 
+# Using pre-trained word2vec Google News corpus (https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit)
+if not os.path.exists('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz'):
+    raise ValueError("SKIP: You need to download the google news model")
+
+preloaded_model = gensim.models.KeyedVectors.load_word2vec_format(
+    '../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz', binary=True)
+
+# Normalizes the vectors in the word2vec class.
+preloaded_model.init_sims(replace=True)
+
 
 def get_sentences(filepath: str) -> list:
     """ Return sentences given a text file.
@@ -84,16 +94,6 @@ def diversity(sentence, tokenized_sentences) -> float:
                 # maximum similarity is minimum edit distance
 
     return min_edit_distance
-
-
-# Using pre-trained word2vec Google News corpus (https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit)
-if not os.path.exists('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz'):
-    raise ValueError("SKIP: You need to download the google news model")
-    
-preloaded_model = gensim.models.KeyedVectors.load_word2vec_format('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz', binary=True)
-
-preloaded_model.init_sims(replace=True)  # Normalizes the vectors in the word2vec class.
-
 
 
 if __name__ == "__main__":
