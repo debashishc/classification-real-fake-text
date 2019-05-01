@@ -39,7 +39,6 @@ def get_sentences(filepath: str) -> list:
     return sentences
 
 
-
 def preprocess(sentences: list) -> list:
     """ Take a list of sentences and return a list of list of words
     where all the words are alphabetic and not a stop word
@@ -78,6 +77,7 @@ def find_plot_diversities(test_sentences, corpus_sentences, diversity_file):
         f.write('[\n')
         f.writelines(',\n'.join(str(nov) for nov in diversities))
         f.write('\n]')
+
 
 def diversity(sentence, tokenized_sentences) -> float:
     """ Calculate the diversity of sentence compared with a given corpus/document.

@@ -20,6 +20,14 @@ from matplotlib import pyplot as plt
 from gensim.models import Word2Vec
 
 
+# Using pre-trained word2vec Google News corpus (https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit)
+if not os.path.exists('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz'):
+    raise ValueError("SKIP: You need to download the google news model")
+    
+preloaded_model = gensim.models.KeyedVectors.load_word2vec_format('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz', binary=True)
+
+preloaded_model.init_sims(replace=True)  # Normalizes the vectors in the word2vec class.
+
 def get_sentences(filepath: str) -> list:
     """ Return sentences given a text file.
         The sentences will be tokenized in this function.
@@ -28,7 +36,6 @@ def get_sentences(filepath: str) -> list:
         data = f.read()
     sentences = nltk.sent_tokenize(data)
     return sentences
-
 
 
 def preprocess(sentences: list) -> list:
@@ -43,6 +50,7 @@ def preprocess(sentences: list) -> list:
         processed_words = [w for w in words if w.isalpha() and (not w in stop_words)]
         preprocessed_sentences.append(processed_words)
     return preprocessed_sentences
+
 
 def find_plot_novelties(test_sentences, corpus_sentences, novelty_file):
     novelties = list()
@@ -67,21 +75,12 @@ def find_plot_novelties(test_sentences, corpus_sentences, novelty_file):
         f.writelines(',\n'.join(str(nov) for nov in novelties))
         f.write(']')
     
+    # # plot novelties against sentence
+    # plt.plot(range(len(novelties)), novelties)
+    # plt.xlabel('Sentence')
+    # plt.ylabel('Novelty')
+    # plt.show()
 
-    # plot novelties against sentence
-    plt.plot(range(len(novelties)), novelties)
-    plt.xlabel('Sentence')
-    plt.ylabel('Novelty')
-    plt.show()
-
-
-# Using pre-trained word2vec Google News corpus (https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit)
-if not os.path.exists('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz'):
-    raise ValueError("SKIP: You need to download the google news model")
-    
-preloaded_model = gensim.models.KeyedVectors.load_word2vec_format('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz', binary=True)
-
-preloaded_model.init_sims(replace=True)  # Normalizes the vectors in the word2vec class.
 
 def novelty(sentence, tokenized_sentences) -> float:
     """ Calculate the diversity of sentence compared with a given corpus/document.

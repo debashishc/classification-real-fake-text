@@ -16,16 +16,14 @@ def get_sentences(filename):
     sentences = nltk.sent_tokenize(data)
     return sentences
 
-def find_plot_diversities(test_sentences, corpus_sentences, diversity_file):
+def find_plot_diversities(test_sentences, corpus_sentences, diversity_file, metric):
     diversities = list()
     num_of_tests = len(test_sentences)
     print("Example corpus sentence: ", corpus_sentences[0])
     print("Example test sentence: ", test_sentences[0])
 
     for sentence in tqdm(test_sentences[:num_of_tests], desc="Generated sentences"):
-        # diversities.append(diversity(sentence, corpus_sentences, 'jaccard'))
-        diversities.append(diversity(sentence, corpus_sentences, 'levenshtein'))
-
+        diversities.append(diversity(sentence, corpus_sentences, metric))
 
     # Minimum diversity can be used to then find the sentence and potentially
     # discover reasons causing diversity to decrease
@@ -56,7 +54,7 @@ if __name__ == '__main__':
 
     # find diversities within the corpus
     find_plot_diversities(test_sentences[5000:], test_sentences,
-                                diversity_file='CHECK_lev_diversities_real_rest.txt')
+                                diversity_file='CHECK_lev_diversities_real_rest.txt', metric='levenshtein')
 
 
 

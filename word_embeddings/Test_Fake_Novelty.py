@@ -19,6 +19,14 @@ from matplotlib import pyplot as plt
 
 from gensim.models import Word2Vec
 
+# Using pre-trained word2vec Google News corpus (https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit)
+if not os.path.exists('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz'):
+    raise ValueError("SKIP: You need to download the google news model")
+    
+preloaded_model = gensim.models.KeyedVectors.load_word2vec_format('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz', binary=True)
+
+preloaded_model.init_sims(replace=True)  # Normalizes the vectors in the word2vec class.
+
 
 def get_sentences(filepath: str) -> list:
     """ Return sentences given a text file.
@@ -28,7 +36,6 @@ def get_sentences(filepath: str) -> list:
         data = f.read()
     sentences = nltk.sent_tokenize(data)
     return sentences
-
 
 
 def preprocess(sentences: list) -> list:
@@ -44,6 +51,7 @@ def preprocess(sentences: list) -> list:
         preprocessed_sentences.append(processed_words)
     return preprocessed_sentences
 
+
 def find_plot_novelties(test_sentences, corpus_sentences, novelty_file):
     novelties = list()
     print("Example corpus sentence: ", corpus_sentences[0])
@@ -51,7 +59,6 @@ def find_plot_novelties(test_sentences, corpus_sentences, novelty_file):
 
     for sentence in tqdm(test_sentences, desc="Test sentences"):
         novelties.append(novelty(sentence, corpus_sentences))
-        # novelties.append(novelty(sentence, corpus_sentences, 'levenshtein'))
 
     # Minimum novelty can be used to then find the sentence and potentially
     # discover reasons causing novelty to decrease
@@ -66,22 +73,13 @@ def find_plot_novelties(test_sentences, corpus_sentences, novelty_file):
         f.write('[')
         f.writelines(',\n'.join(str(nov) for nov in novelties))
         f.write(']')
-    
 
-    # plot novelties against sentence
-    plt.plot(range(len(novelties)), novelties)
-    plt.xlabel('Sentence')
-    plt.ylabel('Novelty')
-    plt.show()
+    # # plot novelties against sentence
+    # plt.plot(range(len(novelties)), novelties)
+    # plt.xlabel('Sentence')
+    # plt.ylabel('Novelty')
+    # plt.show()
 
-
-# Using pre-trained word2vec Google News corpus (https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit)
-if not os.path.exists('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz'):
-    raise ValueError("SKIP: You need to download the google news model")
-    
-preloaded_model = gensim.models.KeyedVectors.load_word2vec_format('../data/w2v_googlenews/GoogleNews-vectors-negative300.bin.gz', binary=True)
-
-preloaded_model.init_sims(replace=True)  # Normalizes the vectors in the word2vec class.
 
 def novelty(sentence, tokenized_sentences) -> float:
     """ Calculate the diversity of sentence compared with a given corpus/document.
@@ -111,7 +109,7 @@ if __name__ == "__main__":
     # find_plot_novelties(processed_fake_text[4500:6000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text45006000.txt')
 
     # find_plot_novelties(processed_fake_text[10500:10750], processed_real_text[:len_real//10], novelty_file='novelties_fake_text1050010750.txt')
-    find_plot_novelties(processed_fake_text[10750:11000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text1075011000.txt')
+    # find_plot_novelties(processed_fake_text[10750:11000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text1075011000.txt')
 
     # find_plot_novelties(processed_fake_text[7500:10000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text750010000.txt')
     # find_plot_novelties(processed_fake_text[10000:], processed_real_text[:len_real//10], novelty_file='novelties_fake_text10000rest.txt')
