@@ -46,14 +46,17 @@ def find_plot_novelties(test_sentences, corpus_sentences, novelty_file, metric):
 
 if __name__ == '__main__':
     # save these sentences and novelties to save computation time
-    test_sentences = get_sentences(TEST_FILE) # 10785 sentences
+    # test_sentences = get_sentences(TEST_FILE) # 10785 sentences
     generated_sentences = get_sentences(GENERATED_FILE) # 11055 sentences
 
     # save these sentences and novelties to save computation time
     real_sentences = get_sentences(DATA_FILE)  # 304222 sentences
 
     len_real = len(real_sentences)
-    print(len(real_sentences))
+    # print(len(real_sentences))
+
+    find_plot_novelties(generated_sentences, real_sentences[:len_real//10],
+                                novelty_file='extra/jaccard_novelties_fake2_10.txt', metric='jaccard')
 
     # print(test_sentences[9]) # They picked him off three times and kept him out of the end zone in a 22 - 6 victory at Arizona in 2013 .
 

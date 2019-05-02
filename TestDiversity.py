@@ -49,12 +49,12 @@ def find_plot_diversities(test_sentences, corpus_sentences, diversity_file, metr
 
 if __name__ == '__main__':
     # save these sentences and diversities to save computation time
-    test_sentences = get_sentences(TEST_FILE) # 10785 sentences
+    # test_sentences = get_sentences(TEST_FILE) # 10785 sentences
     generated_sentences = get_sentences(GENERATED_FILE) # 11055 sentences
 
     # find diversities within the corpus
-    find_plot_diversities(test_sentences[5000:], test_sentences,
-                                diversity_file='CHECK_lev_diversities_real_rest.txt', metric='levenshtein')
+    find_plot_diversities(generated_sentences, generated_sentences,
+                                diversity_file='extra/jaccard_diversities_fake2.txt', metric='jaccard')
 
 
 
