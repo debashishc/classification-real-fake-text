@@ -1,10 +1,3 @@
-# Datasets
-
-DATA_FILE = '../data/emnlp_news.txt'
-TEST_FILE = '../data/test_emnlp.txt'
-GENERATED_FILE = '../data/generated_text2.txt'
-
-
 # Import and download stopwords from NLTK.
 import nltk
 from nltk.corpus import stopwords
@@ -95,10 +88,17 @@ def diversity(sentence, tokenized_sentences) -> float:
 
 
 if __name__ == "__main__":
+
+    # Datasets
+    DATA_FILE = '../data/emnlp_news.txt'
+    TEST_FILE = '../data/test_emnlp.txt'
+    GENERATED_FILE = '../data/generated_text2.txt'
+
     processed_test_text = preprocess(get_sentences(TEST_FILE))
 
-    find_plot_diversities(processed_test_text, processed_test_text,
-                                diversity_file='wmd_diversities_real_text.txt')
+    # find_plot_diversities(processed_test_text, processed_test_text,
+    #                             diversity_file='wmd_diversities_real_text.txt')
 
+    find_plot_diversities(processed_test_text[:10], processed_test_text, diversity_file='../extra/wmd_diversities_real.txt')
     # python3 Test_Real_Diversity.py ; git add wmd_diversities_real_text.txt; git commit -m "Adding wmd_diversities_real.txt"; git push origin master
 

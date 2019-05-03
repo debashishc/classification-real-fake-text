@@ -103,7 +103,9 @@ if __name__ == "__main__":
 
     len_real = len(processed_real_text)
 
-    find_plot_novelties(processed_test_text, processed_real_text[:len_real//10],    
-                                novelty_file='wmd_novelties_real_text.txt')
+    # find_plot_novelties(processed_test_text, processed_real_text[:len_real//10],    
+    #                             novelty_file='wmd_novelties_real_text.txt')
+
+    find_plot_novelties(processed_test_text[:10], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_real.txt')
     # python3 TestNovelty.py ; git add lev_novelties_real.txt; git commit -m "Adding lev_diversities_real.txt"; git push origin master
 

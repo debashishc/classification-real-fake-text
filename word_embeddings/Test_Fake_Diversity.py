@@ -1,10 +1,3 @@
-# Datasets
-
-DATA_FILE = '../data/emnlp_news.txt'
-TEST_FILE = '../data/test_emnlp.txt'
-GENERATED_FILE = '../data/generated_text2.txt'
-
-
 # Import and download stopwords from NLTK.
 import nltk
 from nltk.corpus import stopwords
@@ -97,7 +90,13 @@ def diversity(sentence, tokenized_sentences) -> float:
 
 
 if __name__ == "__main__":
+
+    # Datasets
+
+    DATA_FILE = '../data/emnlp_news.txt'
+    TEST_FILE = '../data/test_emnlp.txt'
+    GENERATED_FILE = '../data/generated_text2.txt'
+
     processed_generated_text = preprocess(get_sentences(GENERATED_FILE))
 
-    find_plot_diversities(processed_generated_text, processed_generated_text,    
-                                diversity_file='diversities_fake_text.txt')
+    # find_plot_diversities(processed_generated_text[:10], processed_generated_text, diversity_file='../extra/wmd_diversities_fake2.txt')

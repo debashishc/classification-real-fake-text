@@ -1,10 +1,3 @@
-# Datasets
-
-DATA_FILE = '../data/emnlp_news.txt'
-TEST_FILE = '../data/test_emnlp.txt'
-GENERATED_FILE = '../data/generated_text2.txt'
-
-
 # Import and download stopwords from NLTK.
 import nltk
 from nltk.corpus import stopwords
@@ -97,13 +90,20 @@ def novelty(sentence, tokenized_sentences) -> float:
 
 
 if __name__ == "__main__":
+
+    # Datasets
+
+    DATA_FILE = '../data/emnlp_news.txt'
+    TEST_FILE = '../data/test_emnlp.txt'
+    GENERATED_FILE = '../data/generated_text2.txt'
+
     processed_fake_text = preprocess(get_sentences(GENERATED_FILE))
     processed_real_text = preprocess(get_sentences(DATA_FILE))
 
     len_real = len(processed_real_text)
     len_fake = len(processed_fake_text)
 
-    # find_plot_novelties(processed_fake_text[:1500], processed_real_text[:len_real//10], novelty_file='novelties_fake_text1500.txt')
+    # find_plot_novelties(processed_fake_text[:10], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_fake2.txt')
     # find_plot_novelties(processed_fake_text[1500:3000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text15003000.txt')
     # find_plot_novelties(processed_fake_text[3000:4500], processed_real_text[:len_real//10], novelty_file='novelties_fake_text300045000.txt')
     # find_plot_novelties(processed_fake_text[4500:6000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text45006000.txt')
