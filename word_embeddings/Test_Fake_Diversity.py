@@ -93,10 +93,10 @@ if __name__ == "__main__":
 
     # Datasets
 
-    DATA_FILE = '../data/emnlp_news.txt'
-    TEST_FILE = '../data/test_emnlp.txt'
-    GENERATED_FILE = '../data/generated_text2.txt'
+    # DATA_FILE = '../data/emnlp_news.txt'
+    # TEST_FILE = '../data/test_emnlp.txt'
+    GENERATED_FILE = '../data/generated_text3.txt'
 
     processed_generated_text = preprocess(get_sentences(GENERATED_FILE))
 
-    # find_plot_diversities(processed_generated_text[:10], processed_generated_text, diversity_file='../extra/wmd_diversities_fake2.txt')
+    find_plot_diversities(processed_generated_text[5000:], processed_generated_text, diversity_file='../extra/wmd_diversities_fake3_5000_rest.txt')
