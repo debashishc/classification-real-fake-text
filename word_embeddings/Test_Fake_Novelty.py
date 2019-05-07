@@ -94,8 +94,7 @@ if __name__ == "__main__":
     # Datasets
 
     DATA_FILE = '../data/emnlp_news.txt'
-    TEST_FILE = '../data/test_emnlp.txt'
-    GENERATED_FILE = '../data/generated_text2.txt'
+    GENERATED_FILE = '../data/generated_text3.txt'
 
     processed_fake_text = preprocess(get_sentences(GENERATED_FILE))
     processed_real_text = preprocess(get_sentences(DATA_FILE))
@@ -103,13 +102,11 @@ if __name__ == "__main__":
     len_real = len(processed_real_text)
     len_fake = len(processed_fake_text)
 
-    # find_plot_novelties(processed_fake_text[:10], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_fake2.txt')
-    # find_plot_novelties(processed_fake_text[1500:3000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text15003000.txt')
-    # find_plot_novelties(processed_fake_text[3000:4500], processed_real_text[:len_real//10], novelty_file='novelties_fake_text300045000.txt')
-    # find_plot_novelties(processed_fake_text[4500:6000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text45006000.txt')
-
-    # find_plot_novelties(processed_fake_text[10500:10750], processed_real_text[:len_real//10], novelty_file='novelties_fake_text1050010750.txt')
-    # find_plot_novelties(processed_fake_text[10750:11000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text1075011000.txt')
-
-    # find_plot_novelties(processed_fake_text[7500:10000], processed_real_text[:len_real//10], novelty_file='novelties_fake_text750010000.txt')
-    # find_plot_novelties(processed_fake_text[10000:], processed_real_text[:len_real//10], novelty_file='novelties_fake_text10000rest.txt')
+    # find_plot_novelties(processed_fake_text[:1500], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_fake3_1500.txt')
+    # find_plot_novelties(processed_fake_text[1500:3000], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_fake3_15003000.txt')
+    # find_plot_novelties(processed_fake_text[3000:4500], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_fake3_30004500.txt')
+    # find_plot_novelties(processed_fake_text[4500:6000], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_fake3_45006000.txt')
+    # find_plot_novelties(processed_fake_text[6000:7500], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_fake3_60007500.txt')
+    # find_plot_novelties(processed_fake_text[7500:9000], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_fake3_75009000.txt')
+    # find_plot_novelties(processed_fake_text[9000:10500], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_fake3_900010500.txt')
+    # find_plot_novelties(processed_fake_text[10500:], processed_real_text[:len_real//10], novelty_file='../extra/wmd_novelties_fake3_10500rest.txt')

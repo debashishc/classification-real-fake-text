@@ -3,10 +3,6 @@ import nltk
 from matplotlib import pyplot as plt
 from tqdm import tqdm
 
-DATA_FILE = 'data/emnlp_news.txt'
-TEST_FILE = 'data/test_emnlp.txt'
-GENERATED_FILE = 'data/generated_text2.txt'
-
 def get_sentences(filename):
     """ Return sentences given a text file.
     """
@@ -45,8 +41,13 @@ def find_plot_novelties(test_sentences, corpus_sentences, novelty_file, metric):
     # plt.show()
 
 if __name__ == '__main__':
+
+    DATA_FILE = 'data/emnlp_news.txt'
+    TEST_FILE = 'data/test_emnlp.txt'
+    GENERATED_FILE = 'data/generated_text3.txt'
+
     # save these sentences and novelties to save computation time
-    test_sentences = get_sentences(TEST_FILE) # 10785 sentences
+    # test_sentences = get_sentences(TEST_FILE) # 10785 sentences
     generated_sentences = get_sentences(GENERATED_FILE) # 11055 sentences
 
     # save these sentences and novelties to save computation time
@@ -55,8 +56,8 @@ if __name__ == '__main__':
     len_real = len(real_sentences)
     # print(len(real_sentences))
 
-    find_plot_novelties(test_sentences[:20], real_sentences[:len_real//10],
-                                novelty_file='extra/lev_novelties_real.txt', metric='levenshtein')
+    find_plot_novelties(generated_sentences[5000:], real_sentences[:len_real//10],
+                                novelty_file='extra/lev_novelties_real_5000_rest.txt', metric='levenshtein')
 
     # print(test_sentences[9]) # They picked him off three times and kept him out of the end zone in a 22 - 6 victory at Arizona in 2013 .
 
