@@ -17,7 +17,9 @@ def find_plot_novelties(test_sentences, corpus_sentences, novelty_file, metric):
     print("Example test sentence: ", test_sentences[0])
 
     for sentence in tqdm(test_sentences, desc="Test sentences"):
-        novelties.append(novelty(sentence, corpus_sentences, metric))
+        sent, _nov = novelty(sentence, corpus_sentences, metric)
+        print('\n', sent)
+        novelties.append(_nov)
 
     # Minimum novelty can be used to then find the sentence and potentially
     # discover reasons causing novelty to decrease
