@@ -48,15 +48,17 @@ def novelty(sentence: str, tokenized_sentences: str, similarity_metric: str) -> 
     """ Calculate the novelty of sentence compared with a given corpus/document.
     """
     # sentences = nltk.sent_tokenize(document)
-
+    max_sim_sentence = ''
     if similarity_metric == 'jaccard':
         max_sim = - np.inf
+        
         for ref_sentence in tokenized_sentences:
             jaccard_sim = jaccard_similarity_words(sentence, ref_sentence)
             if jaccard_sim > max_sim:
+                max_sim_sentence = ref_sentence
                 max_sim = jaccard_sim
 
-        return 1 - max_sim
+        return 1 - max_sim, max_sim_sentence
 
     elif similarity_metric == 'levenshtein':
         min_edit_distance = np.inf
@@ -64,9 +66,10 @@ def novelty(sentence: str, tokenized_sentences: str, similarity_metric: str) -> 
             edit_distance = levenshtein(sentence, ref_sentence) \
                                 / max(len(sentence), len(ref_sentence))
             if edit_distance < min_edit_distance:
+                max_sim_sentence = ref_sentence
                 min_edit_distance = edit_distance
 
-        return min_edit_distance
+        return min_edit_distance, max_sim_sentence
 
 
 if __name__ == '__main__':

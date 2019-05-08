@@ -21,6 +21,7 @@ def diversity(sentence: str, tokenized_sentences: str, similarity_metric: str) -
     """ Calculate the diversity of sentence compared with a given corpus/document.
     """
     # sentences = nltk.sent_tokenize(document)
+    max_sim_sentence = ''
 
     if similarity_metric == 'jaccard':
 
@@ -29,9 +30,10 @@ def diversity(sentence: str, tokenized_sentences: str, similarity_metric: str) -
             if sentence != ref_sentence:
                 jaccard_sim = jaccard_similarity_words(sentence, ref_sentence)
                 if jaccard_sim > max_sim:
+                    max_sim_sentence = ref_sentence
                     max_sim = jaccard_sim
 
-        return 1 - max_sim
+        return 1 - max_sim, max_sim_sentence
 
     elif similarity_metric == 'levenshtein':
         
@@ -42,8 +44,9 @@ def diversity(sentence: str, tokenized_sentences: str, similarity_metric: str) -
                                     / max(len(sentence), len(ref_sentence))
 
                 if edit_distance < min_edit_distance:
+                    max_sim_sentence = ref_sentence
                     min_edit_distance = edit_distance
                     # maximum similarity is minimum edit distance
                     # max_sim = min_edit_distance 
 
-        return min_edit_distance
+        return min_edit_distance, max_sim_sentence
