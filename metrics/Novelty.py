@@ -49,6 +49,9 @@ def novelty(sentence: str, tokenized_sentences: str, similarity_metric: str) -> 
     """
     # sentences = nltk.sent_tokenize(document)
     max_sim_sentence = ''
+    sentence = sentence.lower()
+    tokenized_sentences = [sent.lower() for sent in tokenized_sentences]
+
     if similarity_metric == 'jaccard':
         max_sim = - np.inf
         

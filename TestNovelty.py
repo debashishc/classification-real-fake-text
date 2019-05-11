@@ -17,8 +17,8 @@ def find_plot_novelties(test_sentences, corpus_sentences, novelty_file, metric):
     print("Example test sentence: ", test_sentences[0])
 
     for sentence in tqdm(test_sentences, desc="Test sentences"):
-        sent, _nov = novelty(sentence, corpus_sentences, metric)
-        print('\n', sent)
+        _nov, sent = novelty(sentence, corpus_sentences, metric)
+        print(_nov, '\n', sent)
         novelties.append(_nov)
 
     # Minimum novelty can be used to then find the sentence and potentially
@@ -58,8 +58,8 @@ if __name__ == '__main__':
     len_real = len(real_sentences)
     # print(len(real_sentences))
 
-    find_plot_novelties(generated_sentences[5000:], real_sentences[:len_real//10],
-                                novelty_file='extra/lev_novelties_real_5000_rest.txt', metric='levenshtein')
+    find_plot_novelties(generated_sentences[:50], real_sentences,
+                                novelty_file='extra/jaccard_novelties_real_5000_rest.txt', metric='jaccard')
 
     # print(test_sentences[9]) # They picked him off three times and kept him out of the end zone in a 22 - 6 victory at Arizona in 2013 .
 
