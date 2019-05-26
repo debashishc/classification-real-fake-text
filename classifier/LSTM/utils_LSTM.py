@@ -1,9 +1,3 @@
-__author__ = "Sandra Arcos Holzinger"
-__copyright__ = "Copyright 2019, Sentiment Analysis-BERT"
-__version__ = "1.0"
-__email__ = "Sandra.ArcosHolzinger@thalesgroup.com.au"
-__status__ = "Pre-Production"
-
 #-------------------------------------------------------------PACKAGES-------------------------------------------------------#
 import numpy as np
 import pandas as pd 

@@ -1,9 +1,3 @@
-__author__ = "Sandra Arcos Holzinger"
-__copyright__ = "Copyright 2019, Sentiment Analysis-BERT"
-__version__ = "1.0"
-__email__ = "Sandra.ArcosHolzinger@thalesgroup.com.au"
-__status__ = "Pre-Production"
-
 #-------------------------------------------------------------PACKAGES-------------------------------------------------------#
 from utils_LSTM import keras_predict
 import numpy as np
@@ -121,7 +115,7 @@ def auc_roc(x_test,y_test, model, max_len):
     auc_keras2 = roc_auc_score(y_t.values, y_pred_keras_max_array)# calculate AUC option 2: using predictions.
     return auc_keras,fpr_keras,tpr_keras
 
-def plot_auc_roc(auc_keras, fpr_keras,tpr_keras,dataset, samples, batch_size, max_len,epochs):
+def plot_auc_roc(auc_keras, fpr_keras,tpr_keras, samples, batch_size, max_len,epochs):
     """
     Plots ROC: Receiver Operating Characteristics to visualise how well the classifier can discriminate between classes.
     
@@ -146,7 +140,7 @@ def plot_auc_roc(auc_keras, fpr_keras,tpr_keras,dataset, samples, batch_size, ma
     plt.title('ROC curve')
     plt.legend(loc='lower right')
     ##############################################################################
-    plt.savefig(f'/home/hummus/algorithms-other/LSTM/figures/auc_roc/auc_roc_{dataset}_{samples}_batchsize{batch_size}_maxlen{max_len}_epochs{epochs}.png')
+#     plt.savefig(f'/home/hummus/algorithms-other/LSTM/figures/auc_roc/auc_roc_{dataset}_{samples}_batchsize{batch_size}_maxlen{max_len}_epochs{epochs}.png')
     return plt.show()
 
 def plot_confusion_matrix(y_true, y_pred, classes,
